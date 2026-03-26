@@ -6,3 +6,5 @@ logs/
 
 # Escludi file di log specifici se non sono in una cartella
 *.log
+# Ignora la cartella target generata da Maven
+target/
