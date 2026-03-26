@@ -7,11 +7,13 @@ import java.util.List;
 import it.athon.AriaAPITools.model.*;
 // Importiamo le funzioni (i "costruttori")
 import it.athon.AriaAPITools.utils.*;
+import it.athon.AriaAPITools.utils.ClientRestPrescrizione;
 
 public class MainTestJson {
 
     public static void main(String[] args) {
 
+        ConfigLoader config = new ConfigLoader();
         System.out.println("Avvio test generazione JSON indipendente...\n");
 
         // ==========================================
@@ -91,5 +93,11 @@ public class MainTestJson {
         System.out.println("--- IL TUO JSON FINALE ---");
         System.out.println(jsonRisultato);
         System.out.println("--------------------------");
+
+        // Creiamo il client passandogli la configurazione
+        ClientRestPrescrizione client = new ClientRestPrescrizione();
+        
+        // Inviamo: il client saprà da solo URL, Timeout e Content-Type
+        client.invia(jsonRisultato);
     }
 }

@@ -4,6 +4,7 @@ public class DatiAmministrativi {
     
     private String dataEmissione;
     private String tipologiaPrescrizione;
+    private String tipoRicetta;
     private String tipoModulo;
     private String tipoVisita;
     private String flagSuggerita;
@@ -23,6 +24,12 @@ public class DatiAmministrativi {
     }
     public void setTipologiaPrescrizione(String tipologiaPrescrizione) {
         this.tipologiaPrescrizione = tipologiaPrescrizione;
+    }
+    public String getTipoRicetta() {
+        return tipoRicetta;
+    }
+    public void setTipoRicetta(String tipoRicetta) {
+        this.tipoRicetta = tipoRicetta;
     }
     public String getTipoModulo() {
         return tipoModulo;
@@ -66,6 +73,5 @@ public class DatiAmministrativi {
     public void setGeneraPromemoria(String generaPromemoria) {
         this.generaPromemoria = generaPromemoria;
     }
-
-    
+   
 }

@@ -1,0 +1,50 @@
+2026-03-26 10:01:00.016 [main] INFO  it.athon.AriaAPITools.utils.ClientRestPrescrizione - File di configurazione caricato con successo.
+2026-03-26 10:01:00.040 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Dati Amministrativi: it.athon.AriaAPITools.model.DatiAmministrativi@7692d9cc
+2026-03-26 10:01:00.151 [main] INFO  it.athon.AriaAPITools.utils.JSONmaker - JSON creato con successo:
+{
+  "appl" : "TEST",
+  "idStruttura" : "TEST",
+  "datiOperatore" : {
+    "nomeOperatore" : "NOMETEST",
+    "cognomeOperatore" : "COGNOMETEST",
+    "codiceFiscaleOperatore" : "CGNNTS80A01F205P"
+  },
+  "datiRichiesta" : {
+    "idRichiesta" : "TEST 1",
+    "datiCittadino" : {
+      "codiceFiscale" : "CTTPSC84D15F205E",
+      "cognome" : "CITTADINO",
+      "nome" : "PRESCRITTIVO",
+      "sesso" : "M",
+      "ASLAssistito" : "030321",
+      "provAssistito" : "MI"
+    },
+    "prescrizioni" : [ {
+      "progressivoPrescrizione" : "1",
+      "datiAmministrativi" : {
+        "dataEmissione" : "20140904",
+        "tipologiaPrescrizione" : "02",
+        "tipoModulo" : "09",
+        "tipoVisita" : "A",
+        "flagSuggerita" : "S",
+        "flagRicEl" : "E",
+        "classePriorita" : "P",
+        "flagRipetibile" : "N",
+        "generaPromemoria" : "SI"
+      },
+      "datiSensibili" : {
+        "testoQuesitoDiagnostico" : "Test Registra Prescrizione",
+        "elencoPrestazioni" : {
+          "prestazioniSpecialistiche" : [ {
+            "codicePrestazione" : "0090754",
+            "descrizionePrestazione" : "TEMPO DI PROTROMBINA (PT)",
+            "quantitaPrestazione" : "4"
+          } ]
+        }
+      }
+    } ]
+  }
+}
+2026-03-26 10:01:00.151 [main] INFO  it.athon.AriaAPITools.utils.ClientRestPrescrizione - File di configurazione caricato con successo.
+2026-03-26 10:01:00.322 [main] INFO  it.athon.AriaAPITools.utils.ClientRestPrescrizione - Invio REST: http://localhost:9000/api/prescrizioni POST
+2026-03-26 10:01:00.322 [main] INFO  it.athon.AriaAPITools.utils.ClientRestPrescrizione - [REST] Inviando a: http://localhost:9000/api/prescrizioni (Timeout: 15s)
