@@ -1,0 +1,9 @@
+# Ignora file generati dal sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignora file di log
+*.logs
+
+# Ignora la cartella target generata da Maven
+/target/
