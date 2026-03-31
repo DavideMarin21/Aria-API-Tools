@@ -10,7 +10,7 @@ import it.athon.AriaAPITools.exceptions.ConfigException;
 public class ConfigLoader {
 
     // Inizializzo il logger
-    public Logger logger = LoggerFactory.getLogger(ClientRestPrescrizione.class);
+    public Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
 
     private Properties props = new Properties();
 

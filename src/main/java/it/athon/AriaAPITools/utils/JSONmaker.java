@@ -1,5 +1,11 @@
 package it.athon.AriaAPITools.utils;
 
+/**
+ * Questa classe si occupa di trasformare un oggetto Richiesta in una stringa JSON formattata
+ * Viene utilizzata la libraria Jackson
+ * Il JSON viene creato in modo "pulito", senza campi nulli e con una formattazione leggibile (pretty print)
+ */
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.slf4j.LoggerFactory;
@@ -15,6 +21,7 @@ public class JSONmaker {
         
         try {
             // Inizializzo il motore di Jackson
+
             ObjectMapper mapper = new ObjectMapper();
 
             // Faccio in modo che non vengano inclusi i campi nulli

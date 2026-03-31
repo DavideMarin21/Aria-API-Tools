@@ -3,11 +3,11 @@ package it.athon.AriaAPITools;
 import java.util.Arrays;
 import java.util.List;
 
+import it.athon.AriaAPITools.httpClient.ClientHttp_JSON;
 // Importiamo i modelli
 import it.athon.AriaAPITools.model.*;
 // Importiamo le funzioni (i "costruttori")
 import it.athon.AriaAPITools.utils.*;
-import it.athon.AriaAPITools.utils.ClientRestPrescrizione;
 
 public class MainTestJson {
 
@@ -95,9 +95,20 @@ public class MainTestJson {
         System.out.println("--------------------------");
 
         // Creiamo il client passandogli la configurazione
-        ClientRestPrescrizione client = new ClientRestPrescrizione();
+        ClientHttp_JSON client = new ClientHttp_JSON("https://webhook.site/74d4bf13-749b-4f21-a872-72fdc5332e0b");
         
         // Inviamo: il client saprà da solo URL, Timeout e Content-Type
-        client.invia(jsonRisultato);
+        try {
+            String risposta = client
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer ")
+                .addHeader("dataSetVersion", "2.0")
+                .addHeader("mod", "WS")
+                .inviaPost(jsonRisultato);
+
+            System.out.println("Risultato: " + risposta);
+        } catch (Exception e) {
+            System.err.println("Errore durante l'invio della richiesta POST: " + e.getMessage());
+        }
     }
 }
