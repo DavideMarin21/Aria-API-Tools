@@ -37,7 +37,7 @@ public class MainTestJsonDuePrescrizioni {
         );
         
         // Creo l'oggetto Prescrizione 1
-        Prescrizione prescrizione1 = creaPrescrizione.creaPrescrizione("1", amm1, sensibili1);
+        DatiPrescrizione prescrizione1 = creaPrescrizione.creaPrescrizione("1", amm1, sensibili1);
 
 
         // ==========================================
@@ -54,14 +54,14 @@ public class MainTestJsonDuePrescrizioni {
         );
         
         // Creo l'oggetto Prescrizione 2
-        Prescrizione prescrizione2 = creaPrescrizione.creaPrescrizione("2", amm2, sensibili2);
+        DatiPrescrizione prescrizione2 = creaPrescrizione.creaPrescrizione("2", amm2, sensibili2);
 
 
         // ==========================================
         // UNISCO LE DUE PRESCRIZIONI NELLA LISTA
         // ==========================================
         // Ecco il punto chiave: mettiamo entrambe le prescrizioni nell'array!
-        List<Prescrizione> listaPrescrizioni = Arrays.asList(prescrizione1, prescrizione2);
+        List<DatiPrescrizione> listaPrescrizioni = Arrays.asList(prescrizione1, prescrizione2);
 
 
         // ==========================================

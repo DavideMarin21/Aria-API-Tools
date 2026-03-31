@@ -4,14 +4,13 @@ import it.athon.AriaAPITools.model.DatiCittadino;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-
 import it.athon.AriaAPITools.exceptions.ValidazionePrescrizioneException;
 
 public class CreaDatiCittadino {
 
     /** Posso avere due tipi di caso:
      * 1) tipoModulo = 09: in questo caso devo avere tutti i dati del cittadino
-     * 2) tipoModulo = RUR 2005: in questo caso basta avere solo il codice fiscale del cittadino
+     * 2) tipoModulo = 05: in questo caso basta avere solo il codice fiscale del cittadino
      */ 
 
     public Logger logger = LoggerFactory.getLogger(CreaDatiCittadino.class);

@@ -55,9 +55,9 @@ public class MainTestJson {
         );
 
         // --- PRESCRIZIONE ---
-        Prescrizione prescrizione = creaPrescrizione.creaPrescrizione("1", datiAmm, datiSensibili);
+        DatiPrescrizione prescrizione = creaPrescrizione.creaPrescrizione("1", datiAmm, datiSensibili);
         // Anche le prescrizioni vanno in una lista (il JSON richiede un array)
-        List<Prescrizione> listaPrescrizioni = Arrays.asList(prescrizione);
+        List<DatiPrescrizione> listaPrescrizioni = Arrays.asList(prescrizione);
 
         // --- DATI CITTADINO ---
         DatiCittadino cittadino = creaCittadino.creaDatiCittadino(
