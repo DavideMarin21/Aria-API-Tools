@@ -309,3 +309,57 @@
   }
 }
 2026-03-31 15:39:45.356 [main] INFO  it.athon.AriaAPITools.httpClient.ClientHttp_JSON - Preparo la richiesta POST
+2026-04-01 09:13:53.962 [main] INFO  it.athon.AriaAPITools.utils.ConfigLoader - File di configurazione caricato con successo.
+2026-04-01 09:13:53.966 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Tipologia prescrizione valida
+2026-04-01 09:13:53.967 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Tipo modulo valido
+2026-04-01 09:13:53.967 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Tipo visita valido
+2026-04-01 09:13:53.967 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Flag valido
+2026-04-01 09:13:53.967 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Flag valido
+2026-04-01 09:13:53.967 [main] INFO  it.athon.AriaAPITools.utils.CreaDatiAmministrativi - Dati Amministrativi: it.athon.AriaAPITools.model.DatiAmministrativi@1198b989
+2026-04-01 09:13:54.098 [main] INFO  it.athon.AriaAPITools.utils.JSONmaker - JSON creato con successo:
+{
+  "appl" : "TEST",
+  "idStruttura" : "TEST",
+  "datiOperatore" : {
+    "nomeOperatore" : "NOMETEST",
+    "cognomeOperatore" : "COGNOMETEST",
+    "codiceFiscaleOperatore" : "CGNNTS80A01F205P"
+  },
+  "datiRichiesta" : {
+    "idRichiesta" : "TEST 1",
+    "datiCittadino" : {
+      "codiceFiscale" : "CTTPSC84D15F205E",
+      "cognome" : "CITTADINO",
+      "nome" : "PRESCRITTIVO",
+      "sesso" : "M",
+      "ASLAssistito" : "030321",
+      "provAssistito" : "MI",
+      "aslassistito" : "030321"
+    },
+    "prescrizioni" : [ {
+      "progressivoPrescrizione" : "1",
+      "datiAmministrativi" : {
+        "dataEmissione" : "20140904",
+        "tipologiaPrescrizione" : "02",
+        "tipoModulo" : "09",
+        "tipoVisita" : "A",
+        "flagSuggerita" : "S",
+        "flagRicEl" : "E",
+        "classePriorita" : "P",
+        "flagRipetibile" : "N",
+        "generaPromemoria" : "SI"
+      },
+      "datiSensibili" : {
+        "testoQuesitoDiagnostico" : "Test Registra Prescrizione",
+        "elencoPrestazioni" : {
+          "prestazioniSpecialistiche" : [ {
+            "codicePrestazione" : "0090754",
+            "descrizionePrestazione" : "TEMPO DI PROTROMBINA (PT)",
+            "quantitaPrestazione" : "4"
+          } ]
+        }
+      }
+    } ]
+  }
+}
+2026-04-01 09:13:54.281 [main] INFO  it.athon.AriaAPITools.httpClient.ClientHttp_JSON - Preparo la richiesta POST
