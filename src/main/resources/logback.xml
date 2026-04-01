@@ -1,0 +1,105 @@
+<configuration debug="true">
+
+    <!-- Directory dei log -->
+    <property name="LOG_DIR" value="logs"/>
+
+    <!-- Appender per log generali -->
+    <appender name="APP_UTILITY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/app/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Un file per giorno -->
+            <fileNamePattern>${LOG_DIR}/app/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+         <!-- Filtro per escludere ERROR -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- Appender solo per ERROR -->
+    <appender name="APP_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/errors/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/errors/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender per xds-client-tools -->
+    <appender name="XDS_CLIENT_TOOLS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/lib/xds-client-tools.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/lib/xds-client-tools.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender per xua-core -->
+    <appender name="XUA_CORE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/lib/xua-core.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/lib/xua-core.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="APP_UTILITY" />
+        <appender-ref ref="APP_ERROR" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+<!-- LOG SPECIFICI CAMEL -->
+
+    <!-- Log generale Camel (routing, componenti, eventi) -->
+    <logger name="org.apache.camel" level="INFO" additivity="false">
+        <appender-ref ref="APP_UTILITY"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="it.athon.trasformatore" level="TRACE" additivity="false">
+        <appender-ref ref="APP_UTILITY"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <!-- Log error handler Camel -->
+    <logger name="org.apache.camel.impl.engine.DefaultErrorHandler" level="DEBUG"/>
+
+    <!-- Log dettagli body e headers (se vuoi vederli, metti DEBUG)-->
+    <logger name="org.apache.camel.processor" level="INFO"/>
+
+    <logger name="it.athon.xdstools" level="TRACE" additivity="false">
+        <appender-ref ref="XDS_CLIENT_TOOLS"/>
+    </logger>
+
+    <logger name="it.athon.xua" level="DEBUG" additivity="false">
+        <appender-ref ref="XUA_CORE"/>
+    </logger>
+
+</configuration>

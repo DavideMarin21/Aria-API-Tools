@@ -1,9 +1,10 @@
 package it.athon.AriaAPITools.model;
 
 
-public class Prescrizione {
+public class DatiPrescrizione {
 
     private String progressivoPrescrizione;
+    private String abilitazioneDowngrade;
     private DatiAmministrativi datiAmministrativi;
     private DatiSensibili datiSensibili;
 
@@ -12,6 +13,12 @@ public class Prescrizione {
     }
     public void setProgressivoPrescrizione(String progressivoPrescrizione) {
         this.progressivoPrescrizione = progressivoPrescrizione;
+    }
+    public String getAbilitazioneDowngrade() {
+        return abilitazioneDowngrade;
+    }
+    public void setAbilitazioneDowngrade(String abilitazioneDowngrade) {
+        this.abilitazioneDowngrade = abilitazioneDowngrade;
     }
     public DatiAmministrativi getDatiAmministrativi() {
         return datiAmministrativi;

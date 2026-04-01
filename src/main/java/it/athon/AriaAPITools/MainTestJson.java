@@ -3,6 +3,7 @@ package it.athon.AriaAPITools;
 import java.util.Arrays;
 import java.util.List;
 
+import it.athon.AriaAPITools.httpClient.ClientHttp_JSON;
 // Importiamo i modelli
 import it.athon.AriaAPITools.model.*;
 // Importiamo le funzioni (i "costruttori")
@@ -12,6 +13,7 @@ public class MainTestJson {
 
     public static void main(String[] args) {
 
+        ConfigLoader config = new ConfigLoader();
         System.out.println("Avvio test generazione JSON indipendente...\n");
 
         // ==========================================
@@ -53,9 +55,9 @@ public class MainTestJson {
         );
 
         // --- PRESCRIZIONE ---
-        Prescrizione prescrizione = creaPrescrizione.creaPrescrizione("1", datiAmm, datiSensibili);
+        DatiPrescrizione prescrizione = creaPrescrizione.creaPrescrizione("1", datiAmm, datiSensibili);
         // Anche le prescrizioni vanno in una lista (il JSON richiede un array)
-        List<Prescrizione> listaPrescrizioni = Arrays.asList(prescrizione);
+        List<DatiPrescrizione> listaPrescrizioni = Arrays.asList(prescrizione);
 
         // --- DATI CITTADINO ---
         DatiCittadino cittadino = creaCittadino.creaDatiCittadino(
@@ -91,5 +93,22 @@ public class MainTestJson {
         System.out.println("--- IL TUO JSON FINALE ---");
         System.out.println(jsonRisultato);
         System.out.println("--------------------------");
+
+        // Creiamo il client passandogli la configurazione
+        ClientHttp_JSON client = new ClientHttp_JSON("https://webhook.site/74d4bf13-749b-4f21-a872-72fdc5332e0b");
+        
+        // Inviamo: il client saprà da solo URL, Timeout e Content-Type
+        try {
+            String risposta = client
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer ")
+                .addHeader("dataSetVersion", "2.0")
+                .addHeader("mod", "WS")
+                .inviaPost(jsonRisultato);
+
+            System.out.println("Risultato: " + risposta);
+        } catch (Exception e) {
+            System.err.println("Errore durante l'invio della richiesta POST: " + e.getMessage());
+        }
     }
 }

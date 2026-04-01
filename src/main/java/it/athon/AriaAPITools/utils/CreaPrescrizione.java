@@ -1,13 +1,13 @@
 package it.athon.AriaAPITools.utils;
 import it.athon.AriaAPITools.model.DatiSensibili;
 import it.athon.AriaAPITools.model.DatiAmministrativi;
-import it.athon.AriaAPITools.model.Prescrizione;
+import it.athon.AriaAPITools.model.DatiPrescrizione;
 
 public class CreaPrescrizione {
 
-    public Prescrizione creaPrescrizione(String progressivoPrescrizione, DatiAmministrativi datiAmministrativi, DatiSensibili datiSensibili) {
+    public DatiPrescrizione creaPrescrizione(String progressivoPrescrizione, DatiAmministrativi datiAmministrativi, DatiSensibili datiSensibili) {
 
-        Prescrizione prescrizione = new Prescrizione();
+        DatiPrescrizione prescrizione = new DatiPrescrizione();
 
         prescrizione.setProgressivoPrescrizione(progressivoPrescrizione);
         prescrizione.setDatiAmministrativi(datiAmministrativi);

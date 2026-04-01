@@ -7,7 +7,7 @@ public class DatiRichiesta {
 
     private String idRichiesta;
     private DatiCittadino datiCittadino;
-    private List<Prescrizione> prescrizioni;
+    private List<DatiPrescrizione> prescrizioni;
 
     public String getIdRichiesta() {
         return idRichiesta;
@@ -21,10 +21,10 @@ public class DatiRichiesta {
     public void setDatiCittadino(DatiCittadino datiCittadino) {
         this.datiCittadino = datiCittadino;
     }
-    public List<Prescrizione> getPrescrizioni() {
+    public List<DatiPrescrizione> getPrescrizioni() {
         return prescrizioni;
     }
-    public void setPrescrizioni(List<Prescrizione> prescrizioni) {
+    public void setPrescrizioni(List<DatiPrescrizione> prescrizioni) {
         this.prescrizioni = prescrizioni;
     }
 
