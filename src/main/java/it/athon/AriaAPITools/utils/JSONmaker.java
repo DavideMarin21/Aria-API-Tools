@@ -12,16 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import it.athon.AriaAPITools.model.Richiesta;
+import it.athon.AriaAPITools.processor.validator.validaJSON;
 
 public class JSONmaker {
     
     public Logger logger = LoggerFactory.getLogger(JSONmaker.class);
 
-    public String creaJSON(Richiesta richiesta) {
+    public String creaJSON(Richiesta richiesta) throws Exception{
         
         try {
             // Inizializzo il motore di Jackson
-
             ObjectMapper mapper = new ObjectMapper();
 
             // Faccio in modo che non vengano inclusi i campi nulli
@@ -29,12 +29,16 @@ public class JSONmaker {
 
             // Trasformo l'oggetto Richiesta in JSON
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(richiesta);
-            logger.info("JSON creato con successo:\n" + json);
+            
+            // Controllo che il JSON rispetti le specifiche date dal SISS
+            validaJSON.validaJsonRichiesta(json);
+            
+            logger.info("JSON creato con successo!");
             return json;
             
         } catch (Exception e) {
             logger.error("Errore nella creazione del JSON: " + e.getMessage());
-            return e.getMessage();
+            throw new Exception("Errore nella creazione del JSON: " + e.getMessage());
         }
 
     }
