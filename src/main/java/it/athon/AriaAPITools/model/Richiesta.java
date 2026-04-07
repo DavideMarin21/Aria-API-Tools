@@ -1,11 +1,13 @@
 package it.athon.AriaAPITools.model;
 
+import java.util.List;
+
 public class Richiesta {
     
     String appl;
     String idStruttura;
     DatiOperatore datiOperatore;
-    DatiRichiesta datiRichiesta;
+    List<DatiRichiesta> datiRichiesta;
 
     public String getAppl() {
         return appl;
@@ -25,10 +27,10 @@ public class Richiesta {
     public void setDatiOperatore(DatiOperatore datiOperatore) {
         this.datiOperatore = datiOperatore;
     }
-    public DatiRichiesta getDatiRichiesta() {
+    public List<DatiRichiesta> getDatiRichiesta() {
         return datiRichiesta;
     }
-    public void setDatiRichiesta(DatiRichiesta datiRichiesta) {
+    public void setDatiRichiesta(List<DatiRichiesta> datiRichiesta) {
         this.datiRichiesta = datiRichiesta;
     }
 }

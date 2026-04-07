@@ -1,9 +1,8 @@
-# Ignora file generati dal sistema operativo
-.DS_Store
-Thumbs.db
+# Escludi la cartella target
+target/
 
-# Ignora file di log
-*.logs
+# Escludi la cartella logs
+logs/
 
-# Ignora la cartella target generata da Maven
-/target/
+# Escludi file di log specifici se non sono in una cartella
+*.log

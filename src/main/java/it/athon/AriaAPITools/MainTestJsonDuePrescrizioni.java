@@ -9,7 +9,7 @@ import it.athon.AriaAPITools.utils.*;
 
 public class MainTestJsonDuePrescrizioni {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         System.out.println("Avvio test con DUE prescrizioni...\n");
 
@@ -79,7 +79,7 @@ public class MainTestJsonDuePrescrizioni {
         );
 
         Richiesta richiestaCompleta = creaRichiestaFinale.creaRichiesta(
-            "TEST", "TEST", operatore, datiRichiesta
+            "TEST", "TEST", operatore, List.of(datiRichiesta)
         );
 
         // ==========================================

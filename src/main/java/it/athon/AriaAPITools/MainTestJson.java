@@ -11,7 +11,7 @@ import it.athon.AriaAPITools.utils.*;
 
 public class MainTestJson {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         ConfigLoader config = new ConfigLoader();
         System.out.println("Avvio test generazione JSON indipendente...\n");
@@ -80,7 +80,7 @@ public class MainTestJson {
             "TEST", 
             "TEST", 
             operatore, 
-            datiRichiesta
+            List.of(datiRichiesta)
         );
 
 
@@ -95,13 +95,14 @@ public class MainTestJson {
         System.out.println("--------------------------");
 
         // Creiamo il client passandogli la configurazione
-        ClientHttp_JSON client = new ClientHttp_JSON("https://webhook.site/74d4bf13-749b-4f21-a872-72fdc5332e0b");
+        //ClientHttp_JSON client = new ClientHttp_JSON("https://webhook.site/74d4bf13-749b-4f21-a872-72fdc5332e0b");
+        ClientHttp_JSON client = new ClientHttp_JSON("http://localhost/prova.php");
         
         // Inviamo: il client saprà da solo URL, Timeout e Content-Type
         try {
             String risposta = client
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer ")
+                .addHeader("Authorization", "Bearer 2d60cc84-bd85-37b2-806e-7fb3cb00bfef")
                 .addHeader("dataSetVersion", "2.0")
                 .addHeader("mod", "WS")
                 .inviaPost(jsonRisultato);

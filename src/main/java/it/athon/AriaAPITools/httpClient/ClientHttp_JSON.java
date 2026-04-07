@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import it.athon.AriaAPITools.exceptions.HttpException;
+
 public class ClientHttp_JSON {
 
     public Logger logger = LoggerFactory.getLogger(ClientHttp_JSON.class);
@@ -62,7 +64,7 @@ public class ClientHttp_JSON {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return gestoreRisposta(response);
         } catch (Exception e) {
-            throw new Exception("Errore durante l'invio della richiesta POST: " + e.getMessage(), e);
+            throw new HttpException("Errore durante l'invio della richiesta POST: " + e.getMessage(), e);
         }
     }
 
@@ -74,11 +76,11 @@ public class ClientHttp_JSON {
         }
 
         else switch (code) {
-            case 401 -> throw new Exception("Errore 401: Token non valido o scaduto.");
-            case 403 -> throw new Exception("Errore 403: Permessi insufficienti.");
-            case 404 -> throw new Exception("Errore 404: Endpoint non trovato.");
-            case 500 -> throw new Exception("Errore 500: Errore interno del server regionale.");
-            default -> throw new Exception("Errore HTTP imprevisto: " + code + " - " + response.body());
+            case 401 -> throw new HttpException("Errore 401: Token non valido o scaduto.");
+            case 403 -> throw new HttpException("Errore 403: Permessi insufficienti.");
+            case 404 -> throw new HttpException("Errore 404: Endpoint non trovato.");
+            case 500 -> throw new HttpException("Errore 500: Errore interno del server regionale.");
+            default -> throw new HttpException("Errore HTTP imprevisto: " + code + " - " + response.body());
         }
     }
 

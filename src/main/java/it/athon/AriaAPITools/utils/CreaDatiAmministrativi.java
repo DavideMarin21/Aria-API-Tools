@@ -24,7 +24,7 @@ public class CreaDatiAmministrativi {
 
 
         //Validazione dei dati amministrativi
-        validazioneDataEmissione(dataEmissione);
+        //validazioneDataEmissione(dataEmissione);
         validazioneTipologiaPrescrizione(tipologiaPrescrizione);
         validazioneTipoModulo(tipoModulo);
         validazioneTipoVisita(tipoVisita);
@@ -50,20 +50,20 @@ public class CreaDatiAmministrativi {
     
     }
     
-    private static boolean validazioneDataEmissione(String dataEmissione) {
-
-        /** Verifico se la dataEmissione è nel corretto formato richiesto  */
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-        try {
-            LocalDate.parse(dataEmissione, formatter);
-            return true;
-        } catch (DateTimeParseException e) {
-            throw new ValidazionePrescrizioneException("Errore validazione: La data di emissione '" + dataEmissione + "' non è nel formato corretto 'yyyyMMdd'.");
-        }
-        
-    }
+//    private static boolean validazioneDataEmissione(String dataEmissione) {
+//
+//        /** Verifico se la dataEmissione è nel corretto formato richiesto  */
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+//
+//        try {
+//            LocalDate.parse(dataEmissione, formatter);
+//            return true;
+//        } catch (DateTimeParseException e) {
+//            throw new ValidazionePrescrizioneException("Errore validazione: La data di emissione '" + dataEmissione + "' non è nel formato corretto 'yyyyMMdd'.");
+//        }
+//        
+//    }
 
     private void validazioneTipologiaPrescrizione(String tipologiaPrescrizione) {
 
