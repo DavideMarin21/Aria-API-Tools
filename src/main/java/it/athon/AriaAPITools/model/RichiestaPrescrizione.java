@@ -12,6 +12,9 @@ public class RichiestaPrescrizione {
     
     private DatiOperatore datiOperatori;
     private List<DatiRichiesta> datiRichiesta;
+
+    public RichiestaPrescrizione() {}
+    
     public String getAppl() {
         return appl;
     }

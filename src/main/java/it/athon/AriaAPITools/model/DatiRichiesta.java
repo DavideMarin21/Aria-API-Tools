@@ -9,6 +9,8 @@ public class DatiRichiesta {
     private DatiCittadino datiCittadino;
     private List<DatiPrescrizione> prescrizioni;
 
+    public DatiRichiesta() {}
+
     public String getIdRichiesta() {
         return idRichiesta;
     }

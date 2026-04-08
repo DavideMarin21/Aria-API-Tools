@@ -33,7 +33,7 @@ public class MainTestJsonDuePrescrizioni {
         ElencoPrestazioni elenco1 = creaElenco.creaElencoPrestazioni(Arrays.asList(prestazione1));
         DatiSensibili sensibili1 = creaSensibili.creaDatiSensibili("Test Registra Prescrizione 1", elenco1);
         DatiAmministrativi amm1 = creaAmm.creaDatiAmministrativi(
-            "20140904", "02", "09", "A", "S", "E", "P", "N", "SI"
+            "02", "09", "A", "S", "E", "P", "N", "SI"
         );
         
         // Creo l'oggetto Prescrizione 1
@@ -50,7 +50,7 @@ public class MainTestJsonDuePrescrizioni {
         ElencoPrestazioni elenco2 = creaElenco.creaElencoPrestazioni(Arrays.asList(prestazione2));
         DatiSensibili sensibili2 = creaSensibili.creaDatiSensibili("Esami di routine", elenco2);
         DatiAmministrativi amm2 = creaAmm.creaDatiAmministrativi(
-            "20140905", "01", "08", "C", "N", "E", "U", "N", "NO"
+            "01", "08", "C", "N", "E", "U", "N", "NO"
         );
         
         // Creo l'oggetto Prescrizione 2

@@ -5,6 +5,8 @@ public class DatiOperatore {
     private String nomeOperatore;
     private String cognomeOperatore;
     private String codiceFiscaleOperatore;
+
+    public DatiOperatore(){}
     
     public String getNomeOperatore() {
         return nomeOperatore;

@@ -8,6 +8,8 @@ public class DatiPrescrizione {
     private DatiAmministrativi datiAmministrativi;
     private DatiSensibili datiSensibili;
 
+    public DatiPrescrizione() {}
+
     public String getProgressivoPrescrizione() {
         return progressivoPrescrizione;
     }

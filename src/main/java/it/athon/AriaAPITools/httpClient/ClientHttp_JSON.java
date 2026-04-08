@@ -60,10 +60,13 @@ public class ClientHttp_JSON {
         HttpRequest request = requestBuilder.build();
 
         try {
-
+            logger.info("Invio la richiesta tramite HTTP Post");
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            logger.info("Ricevuta la risposta con codice: " + response.statusCode());
+
             return gestoreRisposta(response);
         } catch (Exception e) {
+            logger.error("Errore dutante l'invio del messaggio tramite HTTP POST");
             throw new HttpException("Errore durante l'invio della richiesta POST: " + e.getMessage(), e);
         }
     }
@@ -83,7 +86,4 @@ public class ClientHttp_JSON {
             default -> throw new HttpException("Errore HTTP imprevisto: " + code + " - " + response.body());
         }
     }
-
-
-    
 }

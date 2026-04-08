@@ -9,6 +9,8 @@ public class PrestazioneSpecialistica {
     private String notaPrestazione;
     private String tipoAccesso;
     private String tempoClinico;
+
+    public PrestazioneSpecialistica() {}
     
     public String getCodicePrestazione() {
         return codicePrestazione;

@@ -51,7 +51,7 @@ public class MainTestJson {
 
         // --- DATI AMMINISTRATIVI ---
         DatiAmministrativi datiAmm = creaAmm.creaDatiAmministrativi(
-            "20140904", "02", "09", "A", "S", "E", "P", "N", "SI"
+            "02", "09", "A", "S", "E", "P", "N", "SI"
         );
 
         // --- PRESCRIZIONE ---

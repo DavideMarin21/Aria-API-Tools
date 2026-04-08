@@ -20,7 +20,7 @@ public class CreaDatiAmministrativi {
 
     public Logger logger = LoggerFactory.getLogger(CreaDatiAmministrativi.class);
 
-    public DatiAmministrativi creaDatiAmministrativi(String dataEmissione, String tipologiaPrescrizione, String tipoModulo, String tipoVisita, String flagSuggerita, String flagRicEl, String classePriorita, String flagRipetibile, String generaPromemoria) {
+    public DatiAmministrativi creaDatiAmministrativi(String tipologiaPrescrizione, String tipoModulo, String tipoVisita, String flagSuggerita, String flagRicEl, String classePriorita, String flagRipetibile, String generaPromemoria) {
 
 
         //Validazione dei dati amministrativi
@@ -34,7 +34,6 @@ public class CreaDatiAmministrativi {
 
         DatiAmministrativi datiAmministrativi = new DatiAmministrativi();
     
-        datiAmministrativi.setDataEmissione(dataEmissione);
         datiAmministrativi.setTipologiaPrescrizione(tipologiaPrescrizione);
         datiAmministrativi.setTipoModulo(tipoModulo);
         datiAmministrativi.setTipoVisita(tipoVisita);

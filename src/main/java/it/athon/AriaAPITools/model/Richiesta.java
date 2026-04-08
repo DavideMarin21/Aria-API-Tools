@@ -9,6 +9,8 @@ public class Richiesta {
     DatiOperatore datiOperatore;
     List<DatiRichiesta> datiRichiesta;
 
+    public Richiesta() {}
+
     public String getAppl() {
         return appl;
     }
