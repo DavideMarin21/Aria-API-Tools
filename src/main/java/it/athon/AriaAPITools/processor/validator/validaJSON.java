@@ -3,6 +3,7 @@ package it.athon.AriaAPITools.processor.validator;
 /**
  * Questa classe permette di validare il JSON creato, verificando che contenga i campi richiesti a seconda dei dati presenti
  */
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import it.athon.AriaAPITools.exceptions.ValidazionePrescrizioneException;
 
 public class validaJSON {
 
-    public static Logger logger = LoggerFactory.getLogger(validaJSON.class);
+    private static final Logger logger = LoggerFactory.getLogger(validaJSON.class);
 
     private static final ObjectMapper mapper = new ObjectMapper();
     
@@ -77,7 +78,10 @@ public class validaJSON {
                     }
                 }
                 validaCittadino(cittadino, tipoRicetta);
+                logger.debug("Dati cittadino validati");
+
                 validaPrescrizioni(prescrizioni);
+                logger.debug("Prescrizioni validate");
             }
 
         }

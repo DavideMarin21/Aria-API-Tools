@@ -17,8 +17,10 @@ public class Prescrizione {
     private String numeroSedute;
     private DatiAmministrativi datiAmministrativi;
     private DatiSensibili datiSensibili;
-    private List<ListaWarning> listaWarning;
-    private List<ListaEccezioni> listaEccezioni;
+    private List<Warning> listaWarning;
+    private List<Eccezione> listaEccezioni;
+
+    public Prescrizione() {}
     
     public String getEsitoOperazione() {
         return esitoOperazione;
@@ -98,16 +100,16 @@ public class Prescrizione {
     public void setDatiSensibili(DatiSensibili datiSensibili) {
         this.datiSensibili = datiSensibili;
     }
-    public List<ListaWarning> getListaWarning() {
+    public List<Warning> getListaWarning() {
         return listaWarning;
     }
-    public void setListaWarning(List<ListaWarning> listaWarning) {
+    public void setListaWarning(List<Warning> listaWarning) {
         this.listaWarning = listaWarning;
     }
-    public List<ListaEccezioni> getListaEccezioni() {
+    public List<Eccezione> getListaEccezioni() {
         return listaEccezioni;
     }
-    public void setListaEccezioni(List<ListaEccezioni> listaEccezioni) {
+    public void setListaEccezioni(List<Eccezione> listaEccezioni) {
         this.listaEccezioni = listaEccezioni;
     }
 

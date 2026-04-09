@@ -1,5 +1,7 @@
 package it.athon.AriaAPITools.httpClient;
 
+import java.io.IOException;
+
 /**
  * Classe per la creazione di un client HTTP per l'invio di richieste e la ricezione delle risposte
  * In questo momento supporta il oggetti JSON
@@ -29,28 +31,33 @@ public class ClientHttp_JSON {
             .connectTimeout(Duration.ofSeconds(10))
             .build();
     
-    private final String baseUrl;
+    private final URI uri;
     private final Map<String, String> headers = new HashMap<>();
 
     public ClientHttp_JSON(String baseUrl) {
-        this.baseUrl = baseUrl;
-        logger.debug("Client HTTP creato con URL: " + baseUrl);
+        this.uri = URI.create(baseUrl);
+        logger.debug("Client HTTP creato con URL: {}", baseUrl);
+        
+        // Header di default per richieste JSON
+        this.headers.put("Content-Type", "application/json");
+        this.headers.put("Accept", "application/json");
+        logger.debug("Content-Type: application/json");
     }
 
     // Questo metodo permette di aggiungere un header alla richiesta HTTP
     public ClientHttp_JSON addHeader(String key, String value) {
         if (value!= null) {
             this.headers.put(key, value);
-            logger.debug("Header aggiunto: " + key + " = " + value);
+            logger.debug("Header aggiunto: {} = {}" , key, value);
         }
         return this;
     }
 
     // Metodo per inviare una richiesta POST
     public String inviaPost(String jsonPayload) throws Exception {
-        logger.info("Preparo la richiesta POST");
+        logger.info("Preparo la richiesta POST verso {}", uri);
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl))
+                .uri(uri)
                 .timeout(Duration.ofSeconds(10))
                 .POST(HttpRequest.BodyPublishers.ofString(jsonPayload));
         
@@ -62,12 +69,17 @@ public class ClientHttp_JSON {
         try {
             logger.info("Invio la richiesta tramite HTTP Post");
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            logger.info("Ricevuta la risposta con codice: " + response.statusCode());
+            logger.info("Ricevuta la risposta con codice: {}", response.statusCode());
 
             return gestoreRisposta(response);
-        } catch (Exception e) {
-            logger.error("Errore dutante l'invio del messaggio tramite HTTP POST");
-            throw new HttpException("Errore durante l'invio della richiesta POST: " + e.getMessage(), e);
+
+        } catch (IOException e) {
+            logger.error("Errore di rete durante l'invio della richiesta POST", e);
+            throw new HttpException("Errore di connessione durante l'invio della richiesta POST: " + e.getMessage(), e);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            logger.error("Il thread è stato interrotto durante la richiesta HTTP", e);
+            throw new HttpException("Richiesta HTTP interrotta: " + e.getMessage(), e);
         }
     }
 

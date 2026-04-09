@@ -10,18 +10,31 @@ import it.athon.AriaAPITools.exceptions.ConfigException;
 public class ConfigLoader {
 
     // Inizializzo il logger
-    public Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
 
     private Properties props = new Properties();
 
+    // Costruttore di default (usa config.properties)
     public ConfigLoader() {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            if (input != null) {
-                props.load(input);
-                logger.info("File di configurazione caricato con successo.");
+        this("config.properties");
+    }
+
+    // Costruttore parametrizzato per massima flessibilità
+    public ConfigLoader(String fileName) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(fileName)) {
+            
+            // 3. Gestione esplicita del file mancante
+            if (input == null) {
+                String errorMsg = "Impossibile trovare il file di configurazione: " + fileName;
+                logger.error(errorMsg);
+                throw new ConfigException(errorMsg);
             }
+            
+            props.load(input);
+            logger.info("File di configurazione '{}' caricato con successo.", fileName);
+            
         } catch (Exception e) {
-            logger.error("Errore durante il caricamento del file di configurazione: " + e.getMessage());
+            logger.error("Errore durante il caricamento del file di configurazione: {}", e.getMessage(), e);
             throw new ConfigException("Errore durante il caricamento del file di configurazione: " + e.getMessage());
         }
     }

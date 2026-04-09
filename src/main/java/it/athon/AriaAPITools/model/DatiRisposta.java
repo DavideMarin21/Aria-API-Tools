@@ -7,7 +7,9 @@ public class DatiRisposta {
     private String idRisposta;
     private DatiCittadino datiCittadino;
     private List<Prescrizione> prescrizione;
-    private List<ListaWarning> warning;
+    private List<Warning> warning;
+
+    public DatiRisposta() {}
     
     public String getIdRisposta() {
         return idRisposta;
@@ -27,12 +29,11 @@ public class DatiRisposta {
     public void setPrescrizione(List<Prescrizione> prescrizione) {
         this.prescrizione = prescrizione;
     }
-    public List<ListaWarning> getWarning() {
+    public List<Warning> getWarning() {
         return warning;
     }
-    public void setWarning(List<ListaWarning> warning) {
+    public void setWarning(List<Warning> warning) {
         this.warning = warning;
     }
-
-    
+ 
 }

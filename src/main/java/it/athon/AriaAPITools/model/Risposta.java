@@ -8,8 +8,10 @@ public class Risposta {
     private String codiceErrore;
     private String descErrore;
     private List<DatiRisposta> datiRisposta;
-    private List<ListaWarning> listaWarning;
-    private List<ListaEccezioni> listaEccezioni;
+    private List<Warning> listaWarning;
+    private List<Eccezione> listaEccezioni;
+
+    public Risposta() {}
     
     public String getEsito() {
         return esito;
@@ -29,22 +31,22 @@ public class Risposta {
     public void setDescErrore(String descErrore) {
         this.descErrore = descErrore;
     }
-    public List<datiRisposta> getDatiRisposta() {
+    public List<DatiRisposta> getDatiRisposta() {
         return datiRisposta;
     }
-    public void setDatiRisposta(List<datiRisposta> datiRisposta) {
+    public void setDatiRisposta(List<DatiRisposta> datiRisposta) {
         this.datiRisposta = datiRisposta;
     }
-    public List<listaWarning> getListaWarning() {
+    public List<Warning> getListaWarning() {
         return listaWarning;
     }
-    public void setListaWarning(List<listaWarning> listaWarning) {
+    public void setListaWarning(List<Warning> listaWarning) {
         this.listaWarning = listaWarning;
     }
-    public List<listaEccezioni> getListaEccezioni() {
+    public List<Eccezione> getListaEccezioni() {
         return listaEccezioni;
     }
-    public void setListaEccezioni(List<listaEccezioni> listaEccezioni) {
+    public void setListaEccezioni(List<Eccezione> listaEccezioni) {
         this.listaEccezioni = listaEccezioni;
     }
 

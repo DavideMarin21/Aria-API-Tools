@@ -18,7 +18,7 @@ import it.athon.AriaAPITools.model.DatiAmministrativi;
 
 public class CreaDatiAmministrativi {
 
-    public Logger logger = LoggerFactory.getLogger(CreaDatiAmministrativi.class);
+    private static final Logger logger = LoggerFactory.getLogger(CreaDatiAmministrativi.class);
 
     public DatiAmministrativi creaDatiAmministrativi(String tipologiaPrescrizione, String tipoModulo, String tipoVisita, String flagSuggerita, String flagRicEl, String classePriorita, String flagRipetibile, String generaPromemoria) {
 
