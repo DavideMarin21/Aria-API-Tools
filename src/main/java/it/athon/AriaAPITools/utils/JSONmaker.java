@@ -35,7 +35,7 @@ public class JSONmaker {
             // Controllo che il JSON rispetti le specifiche date dal SISS
             validaJSON.validaJsonRichiesta(json);
             
-            logger.info("JSON creato con successo! \n {}",json);
+            logger.info("JSON creato con successo! /n" + json);
             return json;
             
         } catch (Exception e) {
