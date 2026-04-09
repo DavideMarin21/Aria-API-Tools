@@ -6,7 +6,8 @@ public class ElencoEsenzioni {
 
     private List<String> codiceEsenzione;
 
-    // Getter e Setter
+    public ElencoEsenzioni() {}
+    
     public List<String> getCodiceEsenzione() {
         return codiceEsenzione;
     }

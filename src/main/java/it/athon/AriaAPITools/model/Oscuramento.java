@@ -6,6 +6,8 @@ public class Oscuramento {
     
     private List<String> codiceCasualeOscuramento;
 
+    public Oscuramento() {}
+
     public List<String> getCodiceCasualeOscuramento() {
         return codiceCasualeOscuramento;
     }

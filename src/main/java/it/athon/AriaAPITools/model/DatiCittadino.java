@@ -43,6 +43,8 @@ public class DatiCittadino {
     private String provAssistito;
     private ElencoEsenzioni elencoEsenzioni;
 
+    public DatiCittadino() {}
+
     public String getIdCittadinoSTP() {
         return idCittadinoSTP;
     }

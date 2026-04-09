@@ -13,7 +13,7 @@ public class CreaDatiCittadino {
      * 2) tipoModulo = 05: in questo caso basta avere solo il codice fiscale del cittadino
      */ 
 
-    public Logger logger = LoggerFactory.getLogger(CreaDatiCittadino.class);
+    private static final Logger logger = LoggerFactory.getLogger(CreaDatiCittadino.class);
 
     public DatiCittadino gesticiCreazione(String tipoModulo, String cfCittadino, String cognomeCittadino, String nomeCittadino, String sessoCittadino, String ASLCittadino, String provCittadino) {
         if (tipoModulo.equals("09")) {

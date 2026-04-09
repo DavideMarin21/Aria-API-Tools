@@ -14,6 +14,8 @@ public class DatiSensibili {
     private Oscuramento oscuramento;
     private ElencoPrestazioni elencoPrestazioni;
 
+    public DatiSensibili() {}
+
     public String getTestoQuesitoDiagnostico() {
         return testoQuesitoDiagnostico;
     }

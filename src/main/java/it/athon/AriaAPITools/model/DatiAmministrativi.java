@@ -17,6 +17,8 @@ public class DatiAmministrativi {
     private String generaPromemoria;
     private String contatorePAI;
     private String nrProtocollo;
+
+    public DatiAmministrativi() {}
     
     public String getDataEmissione() {
         return dataEmissione;

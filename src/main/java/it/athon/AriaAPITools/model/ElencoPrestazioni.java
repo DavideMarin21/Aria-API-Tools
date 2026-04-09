@@ -6,6 +6,8 @@ public class ElencoPrestazioni {
     
     private List<PrestazioneSpecialistica> prestazioniSpecialistiche;
     
+    public ElencoPrestazioni() {}
+    
     public List<PrestazioneSpecialistica> getPrestazioniSpecialistiche() {
         return prestazioniSpecialistiche;
     }
