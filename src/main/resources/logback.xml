@@ -1,4 +1,4 @@
-<configuration debug="true">
+<configuration debug="false">
 
     <!-- Directory dei log -->
     <property name="LOG_DIR" value="logs"/>

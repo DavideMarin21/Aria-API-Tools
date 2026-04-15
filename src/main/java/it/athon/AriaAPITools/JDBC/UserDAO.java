@@ -5,8 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
+import it.athon.AriaAPITools.httpClient.ClientHttp_JSON;
 
 public class UserDAO {
+
+    private static Logger logger = LoggerFactory.getLogger(ClientHttp_JSON.class);
 
     public void insertUser(String nome, String email) {
 
@@ -18,9 +24,9 @@ public class UserDAO {
                 pstmt.setString(2, email);
 
                 pstmt.executeUpdate();
-                System.out.println("Utente inserito correttamente");
+                logger.info("Utente inserito correttamente");
         } catch (SQLException e) {
-            System.err.println("Errore durante l'inserimento: " + e.getMessage());
+            logger.error("Errore durante l'inserimento: " + e.getMessage());
         }   
     }
 
@@ -54,8 +60,10 @@ public class UserDAO {
                 pstmt.setString(4, errorMsg);
 
                 pstmt.executeUpdate();
+                logger.info("Messaggio con id: {} inserito correttamente", exchangeId);
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error("Messaggio con id {} NON è stato inserito correttamente", exchangeId);
         }
     }
 }
