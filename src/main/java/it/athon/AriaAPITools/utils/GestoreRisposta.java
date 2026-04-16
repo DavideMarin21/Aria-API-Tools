@@ -19,12 +19,12 @@ public class GestoreRisposta {
         private final ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        public List<DatiPrescrizioneEstratti> elaboraJson(String jsonRisposta) throws Exception{
+        public Risposta elaboraJson(String jsonRisposta) throws Exception{
 
             Risposta risposta = null;
             try {
                 risposta = mapper.readValue(jsonRisposta, Risposta.class);
-                logger.info("Risposta letta correttamente");
+                logger.info("Risposta letta correttamente e decodificata in oggetto Risposta");
 
             } catch (Exception e) {
                 logger.error("Errore nella lettura del JSON di risposta");
@@ -32,50 +32,44 @@ public class GestoreRisposta {
             }
 
             String esito = risposta.getEsito();
-            if ("OK".equals(esito)) {
-                logger.info("Esito risposta OK");
-                return gestioneOK(risposta);
-            }
-            else if ("KO".equals(esito)) {
-                logger.warn("Esito risposta KO");
-                throw new Exception("Bro il KO devo ancora gestirlo");
-                //gestioneKO(risposta);
-            }
-            else {
-                logger.error("Esito risposta sconosciuto {}", esito);
-                throw new Exception("Esisto risposta sconosciuto");
+            if ("OK".equals(esito) || "KO".equals(esito)) {
+                logger.info("Esito risposta riconosciuto: {}", esito);
+                return risposta;
+            } else {
+                logger.error("Esito risposta sconosciuto: {}", esito);
+                throw new Exception("Esito risposta sconosciuto: " + esito);
             }
         }
 
-        private List<DatiPrescrizioneEstratti> gestioneOK(Risposta risposta) {
+        // private List<DatiPrescrizioneEstratti> gestioneOK(Risposta risposta) {
 
-            List<DatiPrescrizioneEstratti> listaEstratti = new ArrayList<>();
+        //     List<DatiPrescrizioneEstratti> listaEstratti = new ArrayList<>();
 
-            logger.info("Inizio la gestione del messaggio con esito OK");
+        //     logger.info("Inizio la gestione del messaggio con esito OK");
 
-            if (risposta.getDatiRisposta() != null) {
-            for (var dati : risposta.getDatiRisposta()) {
+        //     if (risposta.getDatiRisposta() != null) {
+        //     for (var dati : risposta.getDatiRisposta()) {
                 
-                if (dati.getPrescrizione() != null) {
-                    for (var prescrizione : dati.getPrescrizione()) {
+        //         if (dati.getPrescrizione() != null) {
+        //             for (var prescrizione : dati.getPrescrizione()) {
                         
-                        String nre = prescrizione.getNumeroRicettaElettronica();
-                        String statoPrescrizione = prescrizione.getStatoPrescrizione();
-                        logger.info("StatoPrescrizione: {}", statoPrescrizione);
-                        String base64Pdf = prescrizione.getPromemoriaRE();
+        //                 String nre = prescrizione.getNumeroRicettaElettronica();
+        //                 String statoPrescrizione = prescrizione.getStatoPrescrizione();
+        //                 logger.info("StatoPrescrizione: {}", statoPrescrizione);
+        //                 String base64Pdf = prescrizione.getPromemoriaRE();
 
-                        DatiPrescrizioneEstratti estratto = new DatiPrescrizioneEstratti(nre, statoPrescrizione, base64Pdf);
+        //                 DatiPrescrizioneEstratti estratto = new DatiPrescrizioneEstratti(nre, statoPrescrizione, base64Pdf);
                         
-                        listaEstratti.add(estratto);
-                    }
-                }
-            }
-        }
+        //                 listaEstratti.add(estratto);
+        //             }
+        //         }
+        //     }
+        // }
         
-        return listaEstratti;
+        // return listaEstratti;
             
 
-        }
+        // }
 
         private void gestioneKO(Risposta risposta){
 

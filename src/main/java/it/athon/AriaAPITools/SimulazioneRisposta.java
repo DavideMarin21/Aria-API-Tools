@@ -1,7 +1,11 @@
 package it.athon.AriaAPITools;
 
+import it.athon.AriaAPITools.utils.GestioneKO;
+import it.athon.AriaAPITools.utils.GestioneOK;
 import it.athon.AriaAPITools.utils.GestoreRisposta;
 import it.athon.AriaAPITools.model.DatiPrescrizioneEstratti;
+import it.athon.AriaAPITools.model.Risposta;
+
 import java.util.List;
 
 public class SimulazioneRisposta{
@@ -53,37 +57,63 @@ public class SimulazioneRisposta{
         // NOTA: se il tuo POJO si aspetta la chiave "prescrizione" al singolare,
         // ricordati di cambiarla nel JSON qui sopra!
 
-        GestoreRisposta gestore = new GestoreRisposta();
+        // GestoreRisposta gestore = new GestoreRisposta();
+
+        // try {
+        //     System.out.println("--- AVVIO TEST ESTRAZIONE DATI ---");
+            
+        //     // 2. Chiamo il tuo metodo passandogli il JSON finto
+        //     List<DatiPrescrizioneEstratti> datiProntiPerHL7 = gestore.elaboraJson(jsonMock);
+
+        //     // 3. Stampo i risultati simulando quello che farai per l'HL7
+        //     System.out.println("\\n--- DATI ESTRATTI CON SUCCESSO (" + datiProntiPerHL7.size() + " trovati) ---");
+            
+        //     for (int i = 0; i < datiProntiPerHL7.size(); i++) {
+        //         DatiPrescrizioneEstratti estratto = datiProntiPerHL7.get(i);
+                
+        //         System.out.println("Prescrizione #" + (i + 1));
+        //         System.out.println("  > NRE    : " + estratto.getNre());
+                
+        //         // Stampo solo i primi 20 caratteri del Base64 per non intasare la console
+        //         String base64 = estratto.getPdfBase64();
+        //         String base64Troncato = (base64 != null && base64.length() > 20) 
+        //                 ? base64.substring(0, 20) + "..." 
+        //                 : base64;
+                
+        //         System.out.println("  > Base64 : " + base64Troncato);
+                
+        //         System.out.println("  > StatoPrescrizione : " + estratto.getstatoPrescrizione());
+        //         System.out.println("----------------------------------------");
+        //     }
+
+        // } catch (Exception e) {
+        //     System.err.println("TEST FALLITO: " + e.getMessage());
+        //     e.printStackTrace();
+        // }
 
         try {
-            System.out.println("--- AVVIO TEST ESTRAZIONE DATI ---");
-            
-            // 2. Chiamo il tuo metodo passandogli il JSON finto
-            List<DatiPrescrizioneEstratti> datiProntiPerHL7 = gestore.elaboraJson(jsonMock);
+            // 1. Affido il JSON grezzo al Lettore
+            GestoreRisposta lettore = new GestoreRisposta();
+            Risposta rispostaCompleta = lettore.elaboraJson(jsonMock);
 
-            // 3. Stampo i risultati simulando quello che farai per l'HL7
-            System.out.println("\\n--- DATI ESTRATTI CON SUCCESSO (" + datiProntiPerHL7.size() + " trovati) ---");
-            
-            for (int i = 0; i < datiProntiPerHL7.size(); i++) {
-                DatiPrescrizioneEstratti estratto = datiProntiPerHL7.get(i);
+            // 2. Ora che ho l'oggetto, decido che strada prendere
+            if ("OK".equals(rispostaCompleta.getEsito())) {
                 
-                System.out.println("Prescrizione #" + (i + 1));
-                System.out.println("  > NRE    : " + estratto.getNre());
+                GestioneOK gestoreOk = new GestioneOK();
+                // Passo l'oggetto GIÀ PRONTO, niente doppio parsing!
+                List<DatiPrescrizioneEstratti> estratti = gestoreOk.elabora(rispostaCompleta);
                 
-                // Stampo solo i primi 20 caratteri del Base64 per non intasare la console
-                String base64 = estratto.getPdfBase64();
-                String base64Troncato = (base64 != null && base64.length() > 20) 
-                        ? base64.substring(0, 20) + "..." 
-                        : base64;
+                System.out.println("Trovate " + estratti.size() + " prescrizioni!");
                 
-                System.out.println("  > Base64 : " + base64Troncato);
+            } else {
                 
-                System.out.println("  > StatoPrescrizione : " + estratto.getstatoPrescrizione());
-                System.out.println("----------------------------------------");
+                GestioneKO gestoreKo = new GestioneKO();
+                // Passerei l'oggetto a GestioneKO
+                // DatiErroreEstratti errore = gestoreKo.elabora(rispostaCompleta);
+                System.out.println("Gestito il flusso di KO.");
+                
             }
-
         } catch (Exception e) {
-            System.err.println("TEST FALLITO: " + e.getMessage());
             e.printStackTrace();
         }
     }
