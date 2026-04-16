@@ -11,20 +11,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
+import org.springframework.stereotype.Component;
 import it.athon.AriaAPITools.exceptions.JSONexception;
 import it.athon.AriaAPITools.model.Richiesta;
 import it.athon.AriaAPITools.processor.validator.validaJSON;
 
+@Component
 public class JSONmaker {
     
     private static final Logger logger = LoggerFactory.getLogger(JSONmaker.class);
 
+    private final ObjectMapper mapper;
+
+    public JSONmaker(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
+
     public String creaJSON(Richiesta richiesta) throws Exception{
         
         try {
-            // Inizializzo il motore di Jackson
-            ObjectMapper mapper = new ObjectMapper();
 
             // Faccio in modo che non vengano inclusi i campi nulli
             mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -35,7 +40,7 @@ public class JSONmaker {
             // Controllo che il JSON rispetti le specifiche date dal SISS
             validaJSON.validaJsonRichiesta(json);
             
-            logger.info("JSON creato con successo! /n" + json);
+            logger.info("JSON creato con successo!\n{}", json);
             return json;
             
         } catch (Exception e) {
