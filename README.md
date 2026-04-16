@@ -16,4 +16,4 @@ Inoltre è presente un clinet in grado di inviare il messaggio XML SOAP tramite 
 -------------------------------------------------------------------------------------------------------
 
 
-Il tool non è ancora in grado di gestire le risposte che riceviamo da entrambi i servizi ma sarà il prossimo aggiornamento da fare
+Tool in grado di gestire le risposte ricevuto dalla prescrizione ma non dalla anagrafica attualmente.

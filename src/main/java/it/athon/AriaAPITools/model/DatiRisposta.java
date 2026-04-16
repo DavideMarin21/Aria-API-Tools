@@ -2,11 +2,14 @@ package it.athon.AriaAPITools.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DatiRisposta {
 
     private String idRisposta;
     private DatiCittadino datiCittadino;
-    private List<Prescrizione> prescrizione;
+    @JsonProperty("prescrizioni")
+    private List<Prescrizione> prescrizioni;
     private List<Warning> warning;
 
     public DatiRisposta() {}
@@ -24,10 +27,10 @@ public class DatiRisposta {
         this.datiCittadino = datiCittadino;
     }
     public List<Prescrizione> getPrescrizione() {
-        return prescrizione;
+        return prescrizioni;
     }
     public void setPrescrizione(List<Prescrizione> prescrizione) {
-        this.prescrizione = prescrizione;
+        this.prescrizioni = prescrizione;
     }
     public List<Warning> getWarning() {
         return warning;
