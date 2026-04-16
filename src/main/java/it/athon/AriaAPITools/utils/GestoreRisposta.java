@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.utils;
 
+/**
+ * Classe utile per verificare l'esito della chiamata HTTP REST
+ */
+
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
