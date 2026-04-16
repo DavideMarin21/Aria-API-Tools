@@ -8,3 +8,5 @@ logs/
 *.log
 # Ignora la cartella target generata da Maven
 target/
+
+application.properties

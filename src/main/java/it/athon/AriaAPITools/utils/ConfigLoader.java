@@ -16,7 +16,7 @@ public class ConfigLoader {
 
     // Costruttore di default (usa config.properties)
     public ConfigLoader() {
-        this("config.properties");
+        this("application.properties");
     }
 
     // Costruttore parametrizzato per massima flessibilità
@@ -39,8 +39,8 @@ public class ConfigLoader {
         }
     }
 
-    public String getProperty(String key, String defaultValue) {
-        return props.getProperty(key, defaultValue);
+    public String getProperty(String key) {
+        return props.getProperty(key);
     }
 
     public int getIntProperty(String key, int defaultValue) {

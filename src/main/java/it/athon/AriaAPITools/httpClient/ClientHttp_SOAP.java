@@ -1,12 +1,13 @@
 package it.athon.AriaAPITools.httpClient;
 
-import java.io.IOException;
 
 /**
- * Classe per la creazione di un client HTTP per l'invio di richieste e la ricezione delle risposte
- * In questo momento supporta il oggetti JSON
+ * Classe per l'invio di messaggi SOAP tramite metodo HTTP Post
  */
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,37 +16,35 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
-
+import jakarta.xml.soap.SOAPMessage;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import it.athon.AriaAPITools.exceptions.HttpException;
 
-public class ClientHttp_JSON {
+public class ClientHttp_SOAP {
 
-    private static Logger logger = LoggerFactory.getLogger(ClientHttp_JSON.class);
+    private static Logger logger = LoggerFactory.getLogger(ClientHttp_SOAP.class);
 
     private static final HttpClient client = HttpClient.newBuilder() 
             .version(HttpClient.Version.HTTP_1_1)
             .executor(Executors.newVirtualThreadPerTaskExecutor())
             .connectTimeout(Duration.ofSeconds(10))
             .build();
-    
+
     private final URI uri;
     private final Map<String, String> headers = new HashMap<>();
 
-    public ClientHttp_JSON(String baseUrl) {
+    public ClientHttp_SOAP(String baseUrl) {
         this.uri = URI.create(baseUrl);
         logger.debug("Client HTTP creato con URL: {}", baseUrl);
         
-        // Header di default per richieste JSON
-        this.headers.put("Content-Type", "application/json");
-        this.headers.put("Accept", "application/json");
-        logger.debug("Content-Type: application/json");
+        // Header di default per richieste SOAP
+        this.headers.put("Content-Type", "text/xml; charset=ISO-8859-1");
+        logger.debug("Content-Type: text/xml");
     }
 
-    // Questo metodo permette di aggiungere un header alla richiesta HTTP
-    public ClientHttp_JSON addHeader(String key, String value) {
+    public ClientHttp_SOAP addHeader(String key, String value) {
         if (value!= null) {
             this.headers.put(key, value);
             logger.debug("Header aggiunto: {} = {}" , key, value);
@@ -54,12 +53,17 @@ public class ClientHttp_JSON {
     }
 
     // Metodo per inviare una richiesta POST
-    public String inviaPost(String jsonPayload) throws Exception {
+    public String inviaPost(SOAPMessage soapMessage) throws Exception {
+
+        // Converto il SOAPMessage in un array di byte
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        soapMessage.writeTo(outputStream);
+        byte[] requestBody = outputStream.toByteArray();
         logger.info("Preparo la richiesta POST verso {}", uri);
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .uri(uri)
                 .timeout(Duration.ofSeconds(10))
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload));
+                .POST(HttpRequest.BodyPublishers.ofByteArray(requestBody));
         
         // Aggiungo gli header disponibili
         headers.forEach(requestBuilder::header);
@@ -94,8 +98,11 @@ public class ClientHttp_JSON {
             case 401 -> throw new HttpException("Errore 401: Token non valido o scaduto.");
             case 403 -> throw new HttpException("Errore 403: Permessi insufficienti.");
             case 404 -> throw new HttpException("Errore 404: Endpoint non trovato.");
-            case 500 -> throw new HttpException("Errore 500: Errore interno del server regionale.");
+            case 500 -> {
+                logger.warn("Ricevuto errore 500. Possibile SOAP Fault. Body: {}", response.body());
+                throw new HttpException("Errore 500 (SOAP Fault): " + response.body());}
             default -> throw new HttpException("Errore HTTP imprevisto: " + code + " - " + response.body());
         }
     }
+    
 }
