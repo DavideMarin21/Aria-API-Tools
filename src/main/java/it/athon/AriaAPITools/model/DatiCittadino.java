@@ -1,9 +1,13 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo a DatiCittadino della richiesta JSON
+ */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-//  FORZO L'ORDINE DALL'ALTO VERSO IL BASSO
+//  Forzo il nome è l'ordine perche avevo qualche bug
 @JsonPropertyOrder({ 
     "idCittadinoSTP",
     "codiceFiscale",

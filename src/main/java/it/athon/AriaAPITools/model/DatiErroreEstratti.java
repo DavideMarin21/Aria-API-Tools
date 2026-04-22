@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo agli errori ricevuto dal risposta JSON del SISS
+ */
+
 public class DatiErroreEstratti {
 
     private String codiceErrore;

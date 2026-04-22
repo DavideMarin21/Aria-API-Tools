@@ -1,7 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alla risposta JSON che otteniamo dal SISS
+ */
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DatiRisposta {

@@ -15,9 +15,23 @@ import org.w3c.dom.NodeList;
 
 public class CreaIdentificaCittadinoRequest {
 
+    /**
+     * Aggiunge i dati di ricerca tramite Codice Fiscale.
+     * @param soapMessage Il messaggio SOAP precedentemente.
+     * @param token Il token necessario per farsi accettare il messaggio SOAP
+     * @param codiceFiscale Il CF del cittadino da ricercare.
+     * @param idAna Il codice ANA 
+     * @param idAssistito codice assistito della regione lombardia
+     * @param codiceTs Il numero della Tessera Sanitario necessario per l'anagrafica completa
+     * @return Il messaggio aggiornato.
+     * @throws Exception errore nella creazione del SOAP/XML.
+     */
+
     private static final Logger logger = LoggerFactory.getLogger(CreaIdentificaCittadinoRequest.class);
 
+    // Metodo per creare il messaggio SOAP
     public SOAPMessage createBaseMessage() throws Exception {
+
         // Creo il messaggio SOAP XML
         logger.info("Creo il messaggio XML SOAP");
         MessageFactory messageFactory = MessageFactory.newInstance();
@@ -39,6 +53,7 @@ public class CreaIdentificaCittadinoRequest {
         return soapMessage;
     }
 
+    // Metodo per aggiungere Header al messaggio SOAP
     public SOAPMessage addHeader(SOAPMessage soapMessage, String token) throws Exception {
 
         logger.info("Aggiungo il token al messaggio SOAP");
@@ -56,6 +71,7 @@ public class CreaIdentificaCittadinoRequest {
         return soapMessage;
     }
 
+    // Metodo per aggiungere il tag param al messaggio SOAP
     private SOAPElement creaNodoParametroBase(SOAPMessage soapMessage) throws Exception {
 
         logger.info("Aggiungo il tag param al messaggio SOAP");
@@ -71,6 +87,7 @@ public class CreaIdentificaCittadinoRequest {
 
     }
 
+    // Metodo per aggiungere il CF al messaggio SOAP
     public SOAPMessage addBodyIdentificaCittaddino_CF(SOAPMessage soapMessage, String codiceFiscale, String codiceTs) throws Exception {
 
         logger.info("Creo la richiesta secondo il codice fiscale");
@@ -84,6 +101,7 @@ public class CreaIdentificaCittadinoRequest {
 
     }
 
+    // Metodo per aggiungere idANA al messaggio SOAP
     public SOAPMessage addBodyIdentificaCittaddino_idANA(SOAPMessage soapMessage, String idANA, String codiceTs) throws Exception {
 
         logger.info("Creo la richiesta secondo il codice idAna");
@@ -97,6 +115,7 @@ public class CreaIdentificaCittadinoRequest {
 
     }
 
+    // Metodo per aggiungere l'idAssistito al messaggio SOAP
     public SOAPMessage addBodyIdentificaCittaddino_idAssistito(SOAPMessage soapMessage, String idAssistito, String codiceTs) throws Exception {
 
         logger.info("Creo la richiesta secondo il codice idAssistito");
@@ -110,6 +129,39 @@ public class CreaIdentificaCittadinoRequest {
 
     }
 
+    // Metodo per aggiungere codiceSesso, cognome e data di nascita
+    public SOAPMessage addBodyIdentificaCittadino_SCdN(SOAPMessage soapMessage, String codiceSesso, String Cognome, String dataNascita, String codiceTs) throws Exception {
+
+        logger.info("Creo la richiesta secondo codice Sesso, Cognome e data di Nascita");
+
+        SOAPElement param = creaNodoParametroBase(soapMessage);
+        SOAPElement profiloCittadino = param.addChildElement("profiloCittadino");
+        profiloCittadino.addChildElement("codiceTs").addTextNode(codiceTs);
+        profiloCittadino.addChildElement("cognome").addTextNode(Cognome);
+        profiloCittadino.addChildElement("codiceSesso").addTextNode(codiceSesso);
+        profiloCittadino.addChildElement("dataNascita").addTextNode(dataNascita);
+
+        return soapMessage;
+
+    }
+
+    // Metodo per aggiungere codiceSesso, cognome e nome
+    public SOAPMessage addBodyIdentificaCittadino_SCN(SOAPMessage soapMessage, String codiceSesso, String Cognome, String Nome, String codiceTs) throws Exception {
+
+        logger.info("Creo la richiesta secondo codice Sesso, Cognome e data di Nascita");
+
+        SOAPElement param = creaNodoParametroBase(soapMessage);
+        SOAPElement profiloCittadino = param.addChildElement("profiloCittadino");
+        profiloCittadino.addChildElement("codiceTs").addTextNode(codiceTs);
+        profiloCittadino.addChildElement("cognome").addTextNode(Cognome);
+        profiloCittadino.addChildElement("dataNascita").addTextNode(Nome);
+        profiloCittadino.addChildElement("codiceSesso").addTextNode(codiceSesso);
+
+        return soapMessage;
+
+    }
+
+    // Metodo per aggiungere gli attributi di ricerca
     public SOAPMessage addAttributiRicerca(SOAPMessage soapMessage, String pageNumber, String useWildcard, String maxRecords) throws Exception {
 
         logger.info("Aggiungo l'attributo di ricerca al messaggio SOAP");
@@ -132,9 +184,7 @@ public class CreaIdentificaCittadinoRequest {
 
     }
 
-    /**
-     * Metodo finale per salvare le modifiche del messaggio prima dell'invio.
-     */
+    // Metodo per salvare il messaggio
     public SOAPMessage salvaMessaggio(SOAPMessage soapMessage) throws Exception {
     
         soapMessage.saveChanges();

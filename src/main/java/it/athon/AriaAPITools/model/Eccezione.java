@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alle eccezioni che otteniamo dalla risposta JSON del SISS
+ */
+
 public class Eccezione {
 
     private String codiceEccezione;

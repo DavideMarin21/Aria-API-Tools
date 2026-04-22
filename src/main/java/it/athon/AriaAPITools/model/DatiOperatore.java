@@ -1,14 +1,8 @@
 package it.athon.AriaAPITools.model;
 
-// import lombok.AllArgsConstructor;
-// import lombok.Builder;
-// import lombok.Data;
-// import lombok.NoArgsConstructor;
-
-// @Data
-// @Builder
-// @NoArgsConstructor
-// @AllArgsConstructor
+/**
+ * Modello di dati relativo a DatiOperatore per la richiesta JSON
+ */
 
 public class DatiOperatore {
 

@@ -3,7 +3,7 @@ package it.athon.AriaAPITools.utils;
 /**
  * Questa classe si occupa di trasformare un oggetto Richiesta in una stringa JSON formattata
  * Viene utilizzata la libraria Jackson
- * Il JSON viene creato in modo "pulito", senza campi nulli e con una formattazione leggibile (pretty print)
+ * Il JSON viene creato in modo "pulito", senza campi nulli e con una formattazione leggibile
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,22 +20,24 @@ public class JSONmaker {
     
     private static final Logger logger = LoggerFactory.getLogger(JSONmaker.class);
 
+    // Inizializzo il mapper per costruire il JSON usando la richiesta come stampo
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    static {
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    }
+
+    // Metodo per creare il JSON
     public String creaJSON(Richiesta richiesta) throws Exception{
         
         try {
-            // Inizializzo il motore di Jackson
-            ObjectMapper mapper = new ObjectMapper();
-
-            // Faccio in modo che non vengano inclusi i campi nulli
-            mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
             // Trasformo l'oggetto Richiesta in JSON
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(richiesta);
             
             // Controllo che il JSON rispetti le specifiche date dal SISS
             validaJSON.validaJsonRichiesta(json);
             
-            logger.info("JSON creato con successo! /n" + json);
+            logger.info("JSON creato con successo! \n" + json);
             return json;
             
         } catch (Exception e) {

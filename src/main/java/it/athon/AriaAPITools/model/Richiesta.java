@@ -1,8 +1,19 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alla Richiesta per la richiesta JSON
+ */
+
 import java.util.List;
 
 public class Richiesta {
+
+    /**
+     * @param appl dato obbligatorio
+     * @param idStruttura dato obbligatorio
+     * @param datOperatore dato obbligatorio
+     * @param datiRichiesta dato obbligatorio
+     */
     
     String appl;
     String idStruttura;

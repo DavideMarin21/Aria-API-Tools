@@ -1,5 +1,8 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo a DatiPrescrizione per la richiesta JSON
+ */
 
 public class DatiPrescrizione {
 

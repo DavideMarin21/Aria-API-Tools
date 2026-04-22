@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alla Risposta via JSON che otteniamo dal SISS
+ */
+
 import java.util.List;
 
 public class Risposta {

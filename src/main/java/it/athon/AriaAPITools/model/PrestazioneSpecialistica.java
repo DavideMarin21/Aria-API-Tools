@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alle PrestazioniSpecialistiche per la richiesta JSON
+ */
+
 public class PrestazioneSpecialistica {
     
     private String codicePrestazione;

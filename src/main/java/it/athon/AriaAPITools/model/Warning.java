@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo ai Warning che otteniamo dal JSON di risposta del SISS
+ */
+
 public class Warning {
     
     private String codiceWarning;

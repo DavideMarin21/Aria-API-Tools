@@ -1,4 +1,8 @@
 package it.athon.AriaAPITools.utils;
+/**
+ * Classe per gestire l'esito OK della chiamata HTTP REST per quanto riguarda le chiamate JSON della prescrizone
+ * Restituisce una lista contenente i dati della prescrizione estratti
+ */
 
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;

@@ -3,18 +3,21 @@ package it.athon.AriaAPITools.httpClient;
 import java.io.IOException;
 
 /**
- * Classe per la creazione di un client HTTP per l'invio di richieste e la ricezione delle risposte
- * In questo momento supporta il oggetti JSON
+ * Classe per la creazione di un client HTTP per l'invio di richieste JSON e la ricezione delle risposte.
+ * Utilizza la libreria inclusa con Java: HttpClient
+ * In ingresso abbiamo l'url verso dove inviare il JSON
+ * In caso di esito positivo resitutuisce il body della risposta, in caso contrario restituisce l'errore ricevuto
  */
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.Executors;
+
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executors;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -23,17 +26,30 @@ import it.athon.AriaAPITools.exceptions.HttpException;
 
 public class ClientHttp_JSON {
 
+    /**
+     * Classe per la creazione di un client HTTP
+     * @param baseUrl indirizzo verso cui inviare il JSON
+     * @throws HttpException eccezzione in caso di errore nell'invio del JSON
+     */
+
     private static Logger logger = LoggerFactory.getLogger(ClientHttp_JSON.class);
 
+    //Inizializzo il client Http
     private static final HttpClient client = HttpClient.newBuilder() 
+            // Utilizzo la versione HTTP1.1 che è la versione che usa il SISS
             .version(HttpClient.Version.HTTP_1_1)
+            // Utilizzo i virtual threads in modo da saturare meno la RAM
             .executor(Executors.newVirtualThreadPerTaskExecutor())
+            // Imposto un limite massimo per contattare il server senno sollevo un'eccezione -> NON è configurabile da application properties
             .connectTimeout(Duration.ofSeconds(10))
             .build();
     
     private final URI uri;
+
+    //Inizializzo la mappa per gli header della chiamata HTTP
     private final Map<String, String> headers = new HashMap<>();
 
+    // Costruttore del client dove accetto l'Url e setto dei header di default per la richiesta HTTP Rest con JSON
     public ClientHttp_JSON(String baseUrl) {
         this.uri = URI.create(baseUrl);
         logger.debug("Client HTTP creato con URL: {}", baseUrl);
@@ -44,7 +60,7 @@ public class ClientHttp_JSON {
         logger.debug("Content-Type: application/json");
     }
 
-    // Questo metodo permette di aggiungere un header alla richiesta HTTP
+    // Questo metodo permette di aggiungere un header alla richiesta HTTP in caso ne servissero altri da quelli "classici"
     public ClientHttp_JSON addHeader(String key, String value) {
         if (value!= null) {
             this.headers.put(key, value);
@@ -64,8 +80,10 @@ public class ClientHttp_JSON {
         // Aggiungo gli header disponibili
         headers.forEach(requestBuilder::header);
 
+        // Inizializzo il client Http
         HttpRequest request = requestBuilder.build();
 
+        // Provo a inviare il JSON senno sollevo un'eccezione
         try {
             logger.info("Invio la richiesta tramite HTTP Post");
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -83,6 +101,7 @@ public class ClientHttp_JSON {
         }
     }
 
+    // Metodo per gestire la risposta del client -> DA MODIFICARE PER RENDERE PIù ROBUSTA SOPRATUTTO LA PARTE DI ERRORE
     private String gestoreRisposta(HttpResponse<String> response) throws Exception {
         int code = response.statusCode();
 

@@ -1,4 +1,7 @@
 package it.athon.AriaAPITools.model;
+/**
+ * Modello di dati per i valori di interesse da estrarre nella risposta JSON che otteniamo dal SISS
+*/
 
 public class DatiPrescrizioneEstratti {
 

@@ -1,15 +1,14 @@
-// Questa funzione permette di creare il JSON di prescrizione da inviare al servizio
-
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alla RichiestaPrescrizione per la richiesta JSON
+ */
 import java.util.List;
-
 
 public class RichiestaPrescrizione {
 
     private String appl;
     private String idStruttura;
-    
     private DatiOperatore datiOperatori;
     private List<DatiRichiesta> datiRichiesta;
 

@@ -1,7 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo a DatiRichiesta per la richiesta JSON
+ */
 import java.util.List;
-
 
 public class DatiRichiesta {
 

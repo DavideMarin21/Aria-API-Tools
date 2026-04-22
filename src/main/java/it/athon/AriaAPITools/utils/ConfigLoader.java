@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.utils;
 
+/**
+ * Classe per caricare le configurazioni della libreria API
+ */
+
 import java.io.InputStream;
 import java.util.Properties;
 

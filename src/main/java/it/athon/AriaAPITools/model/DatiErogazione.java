@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo a DatiErogazione per la richiesta JSON
+ */
+
 public class DatiErogazione {
 
     private String codicePrestazione;

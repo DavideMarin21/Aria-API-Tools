@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo alle prescrizioni che otteniamo dal JSON di risposta del SISS
+ */
+
 import java.util.List;
 
 public class Prescrizione {

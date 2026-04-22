@@ -1,7 +1,9 @@
 package it.athon.AriaAPITools.processor.validator;
 
 /**
- * Questa classe permette di validare il JSON creato, verificando che contenga i campi richiesti a seconda dei dati presenti
+ * Questa classe permette di validare il JSON creato, verificando che contenga i campi richiesti a seconda della casistica in cui ci troviamo
+ * In caso di campo mancante viene restitutito un errore indicante il campo 
+ * Utilizza la libreria jackson per "navigare" all'interno del JSON
  */
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,6 +14,13 @@ import it.athon.AriaAPITools.exceptions.ValidazionePrescrizioneException;
 
 public class validaJSON {
 
+    /**
+     * Esegue la validazione completa di una stringa JSON.
+     * @param jsonString La stringa JSON da validare.
+     * @throws ValidazionePrescrizioneException Se un campo obbligatorio è mancante o il valore non è conforme.
+     * @throws Exception Se il formato della stringa non è un JSON valido (parsing error).
+     */
+
     private static final Logger logger = LoggerFactory.getLogger(validaJSON.class);
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -21,7 +30,6 @@ public class validaJSON {
         JsonNode root = mapper.readTree(jsonString);
 
         // Validazione dei campi appl e idStruttura
-
         if (!root.has("appl")) {
             throw new ValidazionePrescrizioneException("JSON non valido: campo obbligatorio mancante: appl");
         }

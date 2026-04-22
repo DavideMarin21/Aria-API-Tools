@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati relativo a ElencoEsenzioni per la richiesta JSON
+ */
+
 import java.util.List;
 
 public class ElencoEsenzioni {

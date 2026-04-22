@@ -1,5 +1,9 @@
 package it.athon.AriaAPITools.model;
 
+/**
+ * Modello di dati per la sezione di DatiAmministrativi del JSON
+ */
+
 public class DatiAmministrativi {
     
     private String dataEmissione;
